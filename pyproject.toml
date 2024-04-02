@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "dsmri"
+version = "0.1.0"
+description = ""
+authors = ["Kushol", "Rafsanjany and Wilman", "Alan H and Kalra", "Sanjay and Yang", "Yee-Hong", "andre.amorim <js.andreamorim.eng@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
