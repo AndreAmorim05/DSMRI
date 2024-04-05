@@ -1,0 +1,1 @@
+from dsmri import main

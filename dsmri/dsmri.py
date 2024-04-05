@@ -12,12 +12,13 @@ The code deeply follows and taken from the MRQy (https://github.com/ccipd/MRQy)
 }
 '''
 
-import os
-import numpy as np
 import argparse
 import datetime
-import features
+import os
 import time
+import warnings
+
+import numpy as np
 import umap
 import scipy
 import pandas as pd
@@ -26,13 +27,17 @@ import matplotlib.cm as cm
 from medpy.io import load
 from scipy.cluster.vq import whiten
 from sklearn.manifold import TSNE
-import warnings        
+
+from dsmri import features
+
 warnings.filterwarnings("ignore") 
 
 nfiledone = 0
 csv_report = None
 first = True
 headers = []
+overwrite_flag = "w"
+
 
 def subject_info(input_dir):
     files = [os.path.join(dirpath,filename) for dirpath, _, filenames in os.walk(input_dir) 
@@ -117,7 +122,7 @@ def cleanup(data_address, per):
     return df
 
 
-if __name__ == '__main__':
+def main():
     start_time = time.time() 
     headers.append(f"start_time:\t{datetime.datetime.now()}")
     parser = argparse.ArgumentParser(description='')
@@ -150,8 +155,6 @@ if __name__ == '__main__':
     else: 
         perplexity = 30
     
-       
-    overwrite_flag = "w"        
     headers.append(f"outdir:\t{os.path.realpath(output_dir)}") 
     files, subject_names  = subject_info(args.inputdir[0])    
 
@@ -182,6 +185,7 @@ if __name__ == '__main__':
     print("The features are saved in the {} file. ".format(output_dir + os.sep + "features.csv"))    
     print("DSMRI program took", format((time.time() - start_time)/60, '.2f'), \
           "minutes for {} MRI samples to run.".format(len(subject_names)))
-    
-    
-    
+
+
+if __name__ == '__main__':
+    ...
